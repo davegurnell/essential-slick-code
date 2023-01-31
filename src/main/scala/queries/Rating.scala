@@ -1,15 +1,15 @@
 package queries
 
-import slick.driver.H2Driver.api._
+import slick.jdbc.H2Profile.api._
 
 sealed abstract class Rating(val stars: Int)
 
 object Rating {
   final case object Awesome extends Rating(5)
-  final case object Good    extends Rating(4)
-  final case object NotBad  extends Rating(3)
-  final case object Meh     extends Rating(2)
-  final case object Aaargh  extends Rating(1)
+  final case object Good extends Rating(4)
+  final case object NotBad extends Rating(3)
+  final case object Meh extends Rating(2)
+  final case object Aaargh extends Rating(1)
 
   implicit val columnType: BaseColumnType[Rating] =
     MappedColumnType.base[Rating, Int](Rating.toInt, Rating.fromInt)

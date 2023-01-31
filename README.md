@@ -1,53 +1,64 @@
-Essential Slick Exercises
-=========================
+# Essential Slick Exercises
 
 Exercises and solutions to accompany [Essential Slick][essential-slick].
 
 Copyright 2016 [Underscore Consulting LLP][underscore].
 Exercise code licensed [Apache 2.0][license].
 
-# Quick Start
+## Quick Start
 
 Follow the instructions below to get set up.
-You will need a Java 8 compatible JVM and a familiar programmer's text editor or IDE.
-If you have any problems please let me know on our [Gitter channel][gitter].
+You will need a recent version of Docker Compose.
 
 1. Clone this repo and switch to the root directory:
 
-    ~~~ bash
-    $ git clone https://github.com/underscoreio/essential-slick-code.git
+   ```bash
+   git clone https://github.com/underscoreio/essential-slick-code.git
 
-    $ cd essential-slick
-    ~~~
+   cd essential-slick
+   ```
 
-2. Run SBT:
+2. Run Docker Compose:
 
-    ~~~ bash
-    $ ./sbt.sh # ".\sbt.bat" on Windows
-    ~~~
+   ```bash
+   docker compose up
+   ```
+
+   This will start two containers:
+   
+    - `app` - containing Scala, SBT, a JVM, and a MySQL client. 
+      The container's working directory mapped to the current directory
+      so you can shell into it and compile and run the application.
+      
+    - `database` - running an instance of MySQL.
+      The container's `/var/lib/mysql` is mapped to `./mysql-data`
+      to persist the database between runs of `docker compose up`.
+      
+3. In a separate terminal, shell into the `app` container:
+
+   ```bash
+   docker compose exec app bash
+   ```
 
 3. Compile and run the example "helloworld.Main" application.
    This will take a few minutes to run the first time.
    You'll need an internet connection to download dependencies:
 
-   ~~~ bash
+   ```bash
    sbt> runMain helloworld.Main
-   ~~~
+   ```
 
-4. If you see a list of albums similar to the following, you're good:
+4. If you see a list of albums similar to the following, all is well!
 
-    ~~~
-    Album(Keyboard Cat,Keyboard Cat's Greatest Hits,1)
-    Album(Spice Girls,Spice,2)
-    Album(Rick Astley,Whenever You Need Somebody,3)
-    Album(Manowar,The Triumph of Steel,4)
-    Album(Justin Bieber,Believe,5)
-    ~~~
+   ```
+   Album(Keyboard Cat,Keyboard Cat's Greatest Hits,1)
+   Album(Spice Girls,Spice,2)
+   Album(Rick Astley,Whenever You Need Somebody,3)
+   Album(Manowar,The Triumph of Steel,4)
+   Album(Justin Bieber,Believe,5)
+   ```
 
-   If not, let me know on the [Gitter channel][gitter].
-
-5. If you use an IDE that requires further setup, do that now.
-   I've included the `sbteclipse` and `ensime-sbt` plugins in the build.
+   If not, drop me an email and I'll try to help.
 
 [essential-slick]: http://underscore.io/books/essential-slick
 [underscore]: http://underscore.io
